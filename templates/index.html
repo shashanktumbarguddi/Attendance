@@ -3,12 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Main Page</title>
 </head>
 <body>
-    <p>
-        Hello world
-    </p>
-    
+    <form action="/" method="POST">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Year</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Absent</th>
+                    <th scope="col">Present</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" name="1st_year">1st year</th>
+                    <td id="total1" name="1st_year_total">17</td>
+                    <td><input type="number" id="absent1" placeholder="Enter absent count" onchange="updatePresent(1)" name="1st_year_absent"></td>
+                    <td id="present1" name="1st_year_present">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">2nd year</th>
+                    <td id="total2">09</td>
+                    <td><input type="number" id="absent2" placeholder="Enter absent count" onchange="updatePresent(2)" name="2nd_year_absent"></td>
+                    <td id="present2">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">3rd year</th>
+                    <td id="total3">20</td>
+                    <td><input type="number" id="absent3" placeholder="Enter absent count" onchange="updatePresent(3)" name="3rd_year_absent"></td>
+                    <td id="present3" name="3rd_year_present">0</td>
+                </tr>
+                <tr>
+                    <th scope="row">4th year</th>
+                    <td id="total4">30</td>
+                    <td><input type="number" id="absent4" placeholder="Enter absent count" onchange="updatePresent(4)" name="4th_year_absent"></td>
+                    <td id="present4">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-start mt-3">
+            <button type="submit" class="btn btn-primary mr-3 shadow">Submit</button>
+            <!-- <a href="/delete" class="btn btn-danger shadow">Reset All Attendance</a> -->
+        </div>
+        
+        
+    </form>
+
 </body>
 </html>

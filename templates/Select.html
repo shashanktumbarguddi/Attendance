@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Select the Absentee</title>
+</head>
+<body>
+    <form action="/absent" method="POST">
+        {% for year, count in absent.items() %}
+            {% if count != 0 %}
+                <div>
+                    <h5>{{ year }} Absent Students</h5>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary">Select Absentees</button>
+                        <div class="dropdown-content">
+                            <div class="checkbox-group">
+                                {% for name in dict[year] %}
+                                    <label>
+                                        <input type="checkbox" name="{{ year }}_absentees[]" value="{{ name }}" onchange="updateAbsentees('{{ year }}')"> {{ name }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <input type="text" id="{{ year }}_absent_names" class="textbox" name="{{ year }}_absent_names" readonly>
+                </div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+</body>
+</html>
