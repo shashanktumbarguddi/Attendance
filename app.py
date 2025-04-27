@@ -1,6 +1,7 @@
 from flask import Flask,render_template,request,redirect
 import pandas as pd
 from datetime import datetime
+import os
 app=Flask(__name__)
 
 ab=[]
@@ -61,11 +62,24 @@ def absent():
         df[today_str] = df['Name'].apply(lambda name: 'A' if name in absent_list else 'P')
         data[sheet] = df
     # Write back
-    with pd.ExcelWriter('Names_List.xlsx', engine='openpyxl', mode='a', if_sheet_exists='replace') as writer:
+# File name based on current month
+    new_file = f"{datetime.today().strftime('%B')}.xlsx"
+
+    # Check if file exists
+    file_exists = os.path.exists(new_file)
+
+    # Set ExcelWriter options
+    if file_exists:
+        writer_options = {'mode': 'a', 'if_sheet_exists': 'replace'}
+    else:
+        writer_options = {'mode': 'w'}  # no need for if_sheet_exists
+
+    # Write to the Excel file
+    with pd.ExcelWriter(new_file, engine='openpyxl', **writer_options) as writer:
         for sheet, df in data.items():
             df.to_excel(writer, sheet_name=sheet, index=False)
 
-    print("✅ Attendance updated!")
+    print(f"✅ Attendance {'updated' if file_exists else 'saved to new file'}: {new_file}")
     
 
 
