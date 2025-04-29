@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="{{ url_for('static', filename='js/text_box.js') }}"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/text_box.css') }}">
+  <title>Attendance Report</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <textarea id="textBox" readonly>
+Good evening madam
+Today attendees 
+                Total--absent
+1st year - {{ totals['First_year'] }} - {{ absents['First_year'] }} = {{ presents['First_year'] }}
+2nd Year - {{ totals['Second_year'] }} - {{ absents['Second_year'] }} = {{ presents['Second_year'] }}
+3rd Year - {{ totals['Third_year'] }} - {{ absents['Third_year'] }} = {{ presents['Third_year'] }}
+4th Year - {{ totals['Fourth_year'] }} - {{ absents['Fourth_year'] }} = {{ presents['Fourth_year'] }}
+{% for key, student_list in names.items() %}
+{{ key.replace('_absent_names', '').replace('_', ' ') }}
+----------
+{% for name in student_list %}
+{{ name }}
+{% endfor %}
+{% endfor %}
+    </textarea>
+
+    <div class="button-group">
+      <button onclick="copyText()">Copy</button>
+      <button onclick="submitText()">Submit</button>
+    </div>
+    <p id="message"></p>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
