@@ -10,7 +10,9 @@
 </head>
 <body>
   <div class="container">
-    <textarea id="textBox" readonly>
+    <!-- Form that sends data to /send_data when submitted -->
+    <form method="POST" action="/send_data">
+      <textarea id="textBox" name="text_content" readonly>
 Good evening madam
 Today attendees 
                 Total--absent
@@ -25,12 +27,17 @@ Today attendees
 {{ name }}
 {% endfor %}
 {% endfor %}
-    </textarea>
+      </textarea>
 
-    <div class="button-group">
-      <button onclick="copyText()">Copy</button>
-      <button onclick="submitText()">Submit</button>
-    </div>
+      <div class="button-group">
+        <!-- Button to copy the text content, this won't submit the form -->
+        <button type="button" onclick="copyText()">Copy</button>
+
+        <!-- Submit button to send the form data to the /send_data route -->
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
     <p id="message"></p>
   </div>
 
