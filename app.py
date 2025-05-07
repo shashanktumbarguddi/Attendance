@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 import os
 import calendar
+import pywhatkit
 app=Flask(__name__)
 
 ab=[]
@@ -119,6 +120,10 @@ def send_data():
 
     # Process the text (you can print it, store it, etc.)
     print("Received text:", text_content)
+
+    pywhatkit.sendwhatmsg_instantly("+919449274988", text_content)
+    print("Message sent ")
+
 
     # Respond to the user (either redirect or render a response)
     return "Data received successfully!"  # Or use redirect or render_template
