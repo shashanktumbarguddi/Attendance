@@ -1,19 +1,38 @@
 function updatePresent(row) {
-    let total = parseInt(document.getElementById('total' + row).textContent);  // Ensure the total is a number
-    let absent = parseInt(document.getElementById('absent' + row).value) || 0;  // Default to 0 if absent is empty or not a number
+    let total = document.getElementById('total' + row).textContent;
+    let absent = document.getElementById('absent' + row).value;
     let present = total - absent;
-
-    // Ensure that present is not negative (if absent is larger than total, it should be set to 0)
-    present = present < 0 ? 0 : present;
-
     document.getElementById('present' + row).textContent = present;
 }
 
+// function updateAbsentees(year) {
+//     let selectedNames = [];
+//     let checkboxes = document.querySelectorAll(`input[name='${year}_absentees[]']:checked`);
+//     checkboxes.forEach(function(checkbox) {
+//         selectedNames.push(checkbox.value);
+//     });
+//     document.getElementById(`${year}_absent_names`).value = selectedNames.join(", ");
+// }
+
+
+// Toggles the visibility of the dropdown content
+function toggleDropdown(button) {
+    const dropdown = button.nextElementSibling;
+    dropdown.classList.toggle('show');
+}
+
+// Closes all dropdowns if clicked outside
+window.onclick = function(event) {
+    if (!event.target.matches('.btn-secondary')) {
+        document.querySelectorAll('.dropdown-content').forEach((dropdown) => {
+            dropdown.classList.remove('show');
+        });
+    }
+};
+
+// Updates the text box with selected absentees
 function updateAbsentees(year) {
-    let selectedNames = [];
-    let checkboxes = document.querySelectorAll(`input[name='${year}_absentees[]']:checked`);
-    checkboxes.forEach(function(checkbox) {
-        selectedNames.push(checkbox.value);
-    });
-    document.getElementById(`${year}_absent_names`).value = selectedNames.join(", ");
+    const checkboxes = document.querySelectorAll(`input[name="${year}_absentees[]"]:checked`);
+    const selectedNames = Array.from(checkboxes).map(cb => cb.value);
+    document.getElementById(`${year}_absent_names`).value = selectedNames.join(', ');
 }

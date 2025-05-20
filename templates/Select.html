@@ -12,22 +12,22 @@
     <form action="/absent" method="POST">
         {% for year, count in absent.items() %}
             {% if count != 0 %}
-                <div>
-                    <h5>{{ year }} Absent Students</h5>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary">Select Absentees</button>
-                        <div class="dropdown-content">
-                            <div class="checkbox-group">
-                                {% for name in dict[year] %}
-                                    <label>
-                                        <input type="checkbox" name="{{ year }}_absentees[]" value="{{ name }}" onchange="updateAbsentees('{{ year }}')"> {{ name }}
-                                    </label>
-                                {% endfor %}
-                            </div>
+            <div>
+                <h5>{{ year }} Absent Students</h5>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-secondary" onclick="toggleDropdown(this)">Select Absentees</button>
+                    <div class="dropdown-content">
+                        <div class="checkbox-group">
+                            {% for name in dict[year] %}
+                                <label>
+                                    <input type="checkbox" name="{{ year }}_absentees[]" value="{{ name }}" onchange="updateAbsentees('{{ year }}')"> {{ name }}
+                                </label>
+                            {% endfor %}
                         </div>
                     </div>
-                    <input type="text" id="{{ year }}_absent_names" class="textbox" name="{{ year }}_absent_names" readonly>
                 </div>
+                <input type="text" id="{{ year }}_absent_names" class="textbox" name="{{ year }}_absent_names" readonly>
+            </div>            
             {% endif %}
         {% endfor %}
         <button type="submit" class="btn btn-primary">Submit</button>
