@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 import os
 import calendar
-import pywhatkit
+
 app=Flask(__name__)
 
 ab=[]
@@ -115,6 +115,7 @@ def absent():
 
 @app.route('/send_data', methods=['POST'])
 def send_data():
+    import pywhatkit
     # Get the submitted text content
     text_content = request.form.get('text_content')
 
